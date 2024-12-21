@@ -11,3 +11,10 @@ export interface NewsCreate {
     content: string;
     image: string | null;
 }
+
+export interface Comment {
+    id: number;
+    newsId: number;
+    author: string;
+    text: string;
+}
