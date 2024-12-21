@@ -3,10 +3,13 @@ import App from "./App.tsx";
 import { Provider } from "react-redux";
 import { store } from "./app/store.ts";
 import { CssBaseline } from "@mui/material";
+import {BrowserRouter} from "react-router-dom";
 
 createRoot(document.getElementById("root")!).render(
     <Provider store={store}>
+        <BrowserRouter>
             <CssBaseline />
             <App />
+        </BrowserRouter>
     </Provider>,
 );

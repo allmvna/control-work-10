@@ -6,6 +6,7 @@ import Loader from "../../UI/Loader/Loader.tsx";
 import {deleteNews, getNews} from "../../slices/newsSlice/newsSlice.tsx";
 import axiosAPI from "../../axiosAPI.ts";
 import {Delete, ReadMore} from "@mui/icons-material";
+import {NavLink} from "react-router-dom";
 
 const NewsList = () => {
     const { news, isLoading, error } = useAppSelector((state) => state.list);
@@ -17,6 +18,17 @@ const NewsList = () => {
 
     return (
         <>
+            <Grid container spacing={2} sx={{ mt: 4 }}>
+                <Grid size={12} sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <Typography variant="h4" sx={{ fontWeight: 'bold' }}>
+                        News
+                    </Typography>
+                    <Button to="/add" component={NavLink} variant="contained" sx={{ backgroundColor: "#001f3d" }}>
+                        Add New Post
+                    </Button>
+                </Grid>
+            </Grid>
+
             {isLoading ? (
                 <Loader />
             ) : error ? (
@@ -66,7 +78,7 @@ const NewsList = () => {
                                                 sx={{
                                                     backgroundColor: "red",
                                                 }}
-                                                onClick={() => dispatch(deleteNews(n.id))}
+                                                onClick={() => dispatch(deleteNews(n.id!))}
                                         >
                                             {isLoading ? <CircularProgress size={24} /> : <Delete/>}
                                         </Button>
