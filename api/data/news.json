@@ -1,0 +1,44 @@
+[
+  {
+    "title": "Asus",
+    "content": "Asus TUF Gaming A15 Ryzen 7 7435HS / SSD 512GB / GeForce RTX 4050 6GB / DOS / 90NR0JP5-M002D0",
+    "image": "/images/74d8f47c-f06f-491d-964e-dbeee9f49161.webp",
+    "id": 1,
+    "imageDate": "2024-12-21T11:19:48.533Z"
+  },
+  {
+    "title": "Lenovo",
+    "content": "Lenovo LOQ 3 Series 15IAX9 Core I5 12450HX 16GB / SSD 512GB / GeForce RTX 3050 6GB / NO OS / 83GS005NRK",
+    "image": "/images/b87bd90d-e429-4c79-8c20-956af1f292f3.webp",
+    "id": 2,
+    "imageDate": "2024-12-21T11:20:40.834Z"
+  },
+  {
+    "title": "HUAWEI",
+    "content": "HUAWEI MateBook D16 Corei5 12450H 16GB / SSD 512GB / Windows 11 / MitchellF-W5651",
+    "image": "/images/c64444d7-3598-4b95-9345-6d4ac5c46638.webp",
+    "id": 6,
+    "imageDate": "2024-12-21T12:14:01.546Z"
+  },
+  {
+    "title": "HP",
+    "content": "HP Laptop 15s-fq5070ci Core i5-1235U 16GB / SSD 512GB / Iris Xe Graphics / Win 11 / 7Z7E6EA ",
+    "image": "/images/b7d08338-baa6-43cc-a0ff-52aaadbd8d9d.webp",
+    "id": 7,
+    "imageDate": "2024-12-21T12:15:06.571Z"
+  },
+  {
+    "title": "Gigabyte",
+    "content": "Gigabyte Aorus 17 Corei7-12700H / 16GB / SSD 1TB / GeForce RTX 3070Ti 8GB / WIin11 / XE5-73RU738HP",
+    "image": "/images/d1d58ba1-5791-4138-825d-d82e8eab40a8.webp",
+    "id": 8,
+    "imageDate": "2024-12-21T12:18:37.160Z"
+  },
+  {
+    "title": "Wireless Mouse",
+    "content": "HP 200 X6W31AA Wireless Mouse",
+    "image": "/images/236e2849-6ce2-4df5-bf9b-92573dfbf31b.webp",
+    "id": 9,
+    "imageDate": "2024-12-21T12:25:29.328Z"
+  }
+]

@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "newsId": 1,
+    "author": "Nika",
+    "text": "80 999 KGS"
+  },
+  {
+    "id": 2,
+    "newsId": 6,
+    "author": "Max",
+    "text": "This laptop works great!"
+  },
+  {
+    "id": 3,
+    "newsId": 2,
+    "author": "Elena",
+    "text": "I advise everyone!"
+  },
+  {
+    "id": 4,
+    "newsId": 7,
+    "author": "Alisa",
+    "text": "59 990 KGS"
+  }
+]
