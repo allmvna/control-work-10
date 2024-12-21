@@ -1,10 +1,11 @@
 import Grid from "@mui/material/Grid2";
-import {Alert, Button, Card, CardContent, CardMedia, Typography} from "@mui/material";
+import {Alert, Button, Card, CardContent, CardMedia, CircularProgress, Typography} from "@mui/material";
 import {useAppDispatch, useAppSelector} from "../../app/hooks.ts";
 import {useEffect} from "react";
 import Loader from "../../UI/Loader/Loader.tsx";
-import {getNews} from "../../slices/newsSlice/newsSlice.tsx";
+import {deleteNews, getNews} from "../../slices/newsSlice/newsSlice.tsx";
 import axiosAPI from "../../axiosAPI.ts";
+import {Delete, ReadMore} from "@mui/icons-material";
 
 const NewsList = () => {
     const { news, isLoading, error } = useAppSelector((state) => state.list);
@@ -57,8 +58,18 @@ const NewsList = () => {
                                     </Grid>
 
                                     <Grid sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 1 }}>
-                                        <Button variant='contained'>Read more...</Button>
-                                        <Button variant='contained'>Delete</Button>
+                                        <Button variant='contained'
+                                        >
+                                            {isLoading ? <CircularProgress size={24} /> : <ReadMore/>}
+                                        </Button>
+                                        <Button variant='contained'
+                                                sx={{
+                                                    backgroundColor: "red",
+                                                }}
+                                                onClick={() => dispatch(deleteNews(n.id))}
+                                        >
+                                            {isLoading ? <CircularProgress size={24} /> : <Delete/>}
+                                        </Button>
                                     </Grid>
                                 </CardContent>
                             </Card>

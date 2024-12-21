@@ -29,6 +29,14 @@ export const getNews = createAsyncThunk<INews[]>(
     }
 );
 
+export const deleteNews = createAsyncThunk<number, number>(
+    'news/deleteNews',
+    async (id) => {
+        await axiosAPI.delete(`/news/${id}`);
+        return id;
+    }
+);
+
 export const newsSlice = createSlice({
     name: 'news',
     initialState,
@@ -44,6 +52,17 @@ export const newsSlice = createSlice({
                 state.news = action.payload;
             })
             .addCase(getNews.rejected, (state) => {
+                state.isLoading = false;
+                state.error = true;
+            })
+            .addCase(deleteNews.pending, (state) => {
+                state.isLoading = true;
+            })
+            .addCase(deleteNews.fulfilled, (state, action) => {
+                state.isLoading = false;
+                state.news = state.news.filter((news) => news.id !== action.payload);
+            })
+            .addCase(deleteNews.rejected, (state) => {
                 state.isLoading = false;
                 state.error = true;
             });
