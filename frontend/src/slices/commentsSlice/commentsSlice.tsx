@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import axiosAPI from "../../axiosAPI.ts";
 
 export interface IComment {
@@ -36,6 +36,14 @@ export const addComment = createAsyncThunk<IComment, { newsId: number, author: s
     }
 );
 
+export const deleteComment = createAsyncThunk<number, number>(
+    'comments/deleteComment',
+    async (id) => {
+        await axiosAPI.delete(`/comments/${id}`);
+        return id;
+    }
+);
+
 export const commentsSlice = createSlice({
     name: 'comment',
     initialState,
@@ -62,6 +70,17 @@ export const commentsSlice = createSlice({
                 state.comments.push(action.payload);
             })
             .addCase(addComment.rejected, (state) => {
+                state.isLoading = false;
+                state.error = true;
+            })
+            .addCase(deleteComment.pending, (state) => {
+                state.isLoading = true;
+            })
+            .addCase(deleteComment.fulfilled, (state, action) => {
+                state.isLoading = false;
+                state.comments = state.comments.filter((news) => news.id !== action.payload);
+            })
+            .addCase(deleteComment.rejected, (state) => {
                 state.isLoading = false;
                 state.error = true;
             });

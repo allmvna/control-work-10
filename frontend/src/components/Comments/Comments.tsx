@@ -1,8 +1,20 @@
-import React, { useEffect, useState } from "react";
-import {Container, Typography, List, ListItem, ListItemText, Alert, TextField, Button, Card} from "@mui/material";
-import { useAppDispatch, useAppSelector } from "../../app/hooks.ts";
+import React, {useEffect, useState} from "react";
+import {
+    Alert,
+    Button,
+    Card,
+    CircularProgress,
+    Container,
+    List,
+    ListItem,
+    ListItemText,
+    TextField,
+    Typography
+} from "@mui/material";
+import {useAppDispatch, useAppSelector} from "../../app/hooks.ts";
 import Loader from "../../UI/Loader/Loader.tsx";
-import { getComments, addComment } from "../../slices/commentsSlice/commentsSlice.tsx";
+import {addComment, deleteComment, getComments} from "../../slices/commentsSlice/commentsSlice.tsx";
+import {Delete} from "@mui/icons-material";
 
 interface CommentsProps {
     newsId: number;
@@ -31,8 +43,7 @@ const Comments: React.FC<CommentsProps> = ({ newsId }) => {
 
     return (
         <Container>
-            <Typography variant="h5">Comments</Typography>
-
+            <Typography sx={{fontWeight: "bold"}} variant="h6">Comments</Typography>
             {isLoading ? (
                 <Loader />
             ) : error ? (
@@ -47,6 +58,14 @@ const Comments: React.FC<CommentsProps> = ({ newsId }) => {
                                         primary={`Author: ${comment.author}`}
                                         secondary={`Comment: ${comment.text}`}
                                     />
+                                    <Button variant='contained'
+                                            sx={{
+                                                backgroundColor: "red",
+                                            }}
+                                            onClick={() => dispatch(deleteComment(comment.id!))}
+                                    >
+                                        {isLoading ? <CircularProgress size={24}/> : <Delete/>}
+                                    </Button>
                                 </ListItem>
                             ))
                         ) : (
@@ -56,6 +75,7 @@ const Comments: React.FC<CommentsProps> = ({ newsId }) => {
                 </Card>
             )}
 
+            <Typography color="success" variant="h6" sx={{mt: 1, fontWeight: "bold"}}>Add new comment:</Typography>
             <form onSubmit={handleCommentSubmit}>
                 <TextField
                     label="Author"
@@ -73,9 +93,8 @@ const Comments: React.FC<CommentsProps> = ({ newsId }) => {
                     onChange={(e) => setText(e.target.value)}
                     margin="normal"
                     multiline
-                    rows={4}
                 />
-                <Button type="submit" variant="contained" color="primary" disabled={isLoading}>
+                <Button type="submit" variant="contained" color="success" disabled={isLoading}>
                    Add
                 </Button>
             </form>

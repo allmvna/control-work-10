@@ -4,6 +4,7 @@ import React, {useState} from "react";
 import {useAppDispatch, useAppSelector} from "../../app/hooks.ts";
 import FileInput from "../FileInput/FileInput.tsx";
 import {sendNews} from "../../slices/newsSlice/newsSlice.tsx";
+import {useNavigate} from "react-router-dom";
 
 
 const initialState = {
@@ -16,6 +17,7 @@ const Form = () => {
     const [formData, setFormData] = useState(initialState);
     const { isLoading } = useAppSelector((state) => state.newsList);
     const dispatch = useAppDispatch();
+    const navigate = useNavigate();
 
     const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
@@ -47,6 +49,7 @@ const Form = () => {
         try {
             await dispatch(sendNews(formData));
             setFormData(initialState);
+            navigate('/');
         } catch (e) {
             console.error(e);
         }

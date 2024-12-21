@@ -71,6 +71,7 @@ const NewsDetail = () => {
                     )}
                     <Typography variant="body1" mt={2}>{newsDetail.content}</Typography>
                 </CardContent>
+                <hr/>
                 <Comments newsId={newsDetail.id!}/>
             </Card>
         </Container>
