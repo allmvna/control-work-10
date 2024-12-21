@@ -39,6 +39,7 @@ const NewsDetail = () => {
         );
     }
 
+
     return (
         <>
             <Container>
@@ -56,7 +57,7 @@ const NewsDetail = () => {
                     {newsDetail.imageDate && (
                         <Typography color="textSecondary"> {dayjs(newsDetail.imageDate).format('dddd, MMMM D, YYYY')}</Typography>
                     )}
-                    {newsDetail.image && (
+                    {newsDetail.image ? (
                         <CardMedia
                             component="img"
                             src={`${axiosAPI.defaults.baseURL}${newsDetail.image}`}
@@ -68,6 +69,8 @@ const NewsDetail = () => {
                                 mt: 2
                             }}
                         />
+                    ) : (
+                        <Typography variant="body2" color="textSecondary" mt={2}>No Image Available</Typography>
                     )}
                     <Typography variant="body1" mt={2}>{newsDetail.content}</Typography>
                 </CardContent>

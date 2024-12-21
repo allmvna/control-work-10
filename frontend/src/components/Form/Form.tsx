@@ -3,7 +3,7 @@ import {Button, TextField} from "@mui/material";
 import React, {useState} from "react";
 import {useAppDispatch, useAppSelector} from "../../app/hooks.ts";
 import FileInput from "../FileInput/FileInput.tsx";
-import {sendNews} from "../../slices/newsSlice/newsSlice.tsx";
+import {getNews, sendNews} from "../../slices/newsSlice/newsSlice.tsx";
 import {useNavigate} from "react-router-dom";
 
 
@@ -49,6 +49,7 @@ const Form = () => {
         try {
             await dispatch(sendNews(formData));
             setFormData(initialState);
+            await dispatch(getNews());
             navigate('/');
         } catch (e) {
             console.error(e);
