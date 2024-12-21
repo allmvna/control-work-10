@@ -3,11 +3,14 @@ import commentsRoutes from "./routes/comments/comments";
 import newsRoutes from "./routes/news/news";
 import newsFileDb from "./filesDb/newsFileDb";
 import commentsFileDb from "./filesDb/commentsFileDb";
+import cors from "cors";
 
 const app = express();
 const port = 8000;
 
+app.use(cors());
 app.use(express.json());
+app.use(express.static('public'));
 
 app.use('/news', newsRoutes);
 app.use('/comments', commentsRoutes);

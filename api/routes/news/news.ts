@@ -37,7 +37,7 @@ newsRoutes.get('/:id', async (req, res) => {
 
 newsRoutes.post('/',imagesUpload.single('image'),  async (req, res) => {
     const { title, content } = req.body;
-    const image = req.file ? req.file.path : null;
+    const image = req.file ? '/images' + req.file.filename : null;
 
     if (!title || !content) {
         res.status(400).json({ message: 'Title and content are required' });
@@ -47,7 +47,7 @@ newsRoutes.post('/',imagesUpload.single('image'),  async (req, res) => {
     const newNewsCreate: NewsCreate = {
         title,
         content,
-        image: image || null,
+        image
     };
 
     try {
