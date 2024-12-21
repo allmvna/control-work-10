@@ -70,7 +70,10 @@ const NewsList = () => {
                                     </Grid>
 
                                     <Grid sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 1 }}>
-                                        <Button variant='contained'
+                                        <Button
+                                            variant='contained'
+                                            to={`/news/${n.id}`}
+                                            component={NavLink}
                                         >
                                             {isLoading ? <CircularProgress size={24} /> : <ReadMore/>}
                                         </Button>

@@ -11,12 +11,14 @@ export interface INews {
 
 interface NewsState {
     news: INews[];
+    newsDetail: INews | null;
     isLoading: boolean;
     error: boolean;
 }
 
 const initialState: NewsState = {
     news: [],
+    newsDetail: null,
     isLoading: false,
     error: false,
 };
@@ -25,6 +27,14 @@ export const getNews = createAsyncThunk<INews[]>(
     'news/getNews',
     async () => {
         const { data } = await axiosAPI.get<INews[]>('/news');
+        return data;
+    }
+);
+
+export const getNewsById = createAsyncThunk<INews, number>(
+    'news/getNewsById',
+    async (id) => {
+        const { data } = await axiosAPI.get<INews>(`/news/${id}`);
         return data;
     }
 );
@@ -99,6 +109,18 @@ export const newsSlice = createSlice({
                 state.news.push(action.payload);
             })
             .addCase(sendNews.rejected, (state) => {
+                state.isLoading = false;
+                state.error = true;
+            })
+            .addCase(getNewsById.pending, (state) => {
+                state.isLoading = true;
+                state.error = false;
+            })
+            .addCase(getNewsById.fulfilled, (state, action) => {
+                state.isLoading = false;
+                state.newsDetail = action.payload;
+            })
+            .addCase(getNewsById.rejected, (state) => {
                 state.isLoading = false;
                 state.error = true;
             });
