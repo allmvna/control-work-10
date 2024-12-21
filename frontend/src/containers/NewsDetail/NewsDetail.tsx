@@ -5,11 +5,13 @@ import { useAppDispatch, useAppSelector } from "../../app/hooks.ts";
 import { getNewsById } from "../../slices/newsSlice/newsSlice.tsx";
 import axiosAPI from "../../axiosAPI.ts";
 import Loader from "../../UI/Loader/Loader.tsx";
+import Comments from "../../components/Comments/Comments.tsx";
+import dayjs from 'dayjs';
 
 const NewsDetail = () => {
     const { id } = useParams<{ id: string }>();
     const dispatch = useAppDispatch();
-    const { newsDetail, isLoading, error } = useAppSelector((state) => state.list);
+    const { newsDetail, isLoading, error } = useAppSelector((state) => state.newsList);
 
     useEffect(() => {
         if (id) {
@@ -37,15 +39,6 @@ const NewsDetail = () => {
         );
     }
 
-
-    if (!newsDetail) {
-        return (
-            <Container>
-                <Alert severity="warning">News not found.</Alert>
-            </Container>
-        );
-    }
-
     return (
         <>
             <Container>
@@ -55,17 +48,18 @@ const NewsDetail = () => {
                     border: "3px solid",
                     borderRadius: "10px",
                     marginTop: 2,
+                    p: 2
                 }}
             >
                 <CardContent>
                     <Typography variant="h4" gutterBottom>{newsDetail.title}</Typography>
                     {newsDetail.imageDate && (
-                        <Typography color="textSecondary">{newsDetail.imageDate}</Typography>
+                        <Typography color="textSecondary"> {dayjs(newsDetail.imageDate).format('dddd, MMMM D, YYYY')}</Typography>
                     )}
                     {newsDetail.image && (
                         <CardMedia
                             component="img"
-                            src={axiosAPI + `${newsDetail.image}`}
+                            src={`${axiosAPI.defaults.baseURL}${newsDetail.image}`}
                             title={newsDetail.title}
                             sx={{
                                 borderRadius: "8px",
@@ -77,6 +71,7 @@ const NewsDetail = () => {
                     )}
                     <Typography variant="body1" mt={2}>{newsDetail.content}</Typography>
                 </CardContent>
+                <Comments newsId={newsDetail.id!}/>
             </Card>
         </Container>
         </>

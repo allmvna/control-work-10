@@ -14,7 +14,7 @@ const initialState = {
 
 const Form = () => {
     const [formData, setFormData] = useState(initialState);
-    const { isLoading } = useAppSelector((state) => state.list);
+    const { isLoading } = useAppSelector((state) => state.newsList);
     const dispatch = useAppDispatch();
 
     const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {

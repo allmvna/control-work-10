@@ -7,9 +7,10 @@ import {deleteNews, getNews} from "../../slices/newsSlice/newsSlice.tsx";
 import axiosAPI from "../../axiosAPI.ts";
 import {Delete, ReadMore} from "@mui/icons-material";
 import {NavLink} from "react-router-dom";
+import dayjs from 'dayjs';
 
 const NewsList = () => {
-    const { news, isLoading, error } = useAppSelector((state) => state.list);
+    const { news, isLoading, error } = useAppSelector((state) => state.newsList);
     const dispatch = useAppDispatch();
 
     useEffect(() => {
@@ -20,7 +21,7 @@ const NewsList = () => {
         <>
             <Grid container spacing={2} sx={{ mt: 4 }}>
                 <Grid size={12} sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <Typography variant="h4" sx={{ fontWeight: 'bold' }}>
+                    <Typography variant="h4" sx={{ fontWeight: 'bold', mb: 2 }}>
                         News
                     </Typography>
                     <Button to="/add" component={NavLink} variant="contained" sx={{ backgroundColor: "#001f3d" }}>
@@ -33,6 +34,8 @@ const NewsList = () => {
                 <Loader />
             ) : error ? (
                 <Alert severity="error">There is no data. Please try again later!</Alert>
+            ) : news.length === 0 ? (
+                <Alert severity="info">No news available at the moment.</Alert>
             ) : (
                 <Grid container spacing={2} sx={{ mt: 4 }}>
                     {news.map((n) => (
@@ -49,7 +52,7 @@ const NewsList = () => {
                                         <Grid sx={{ pr: 2 }}>
                                             <CardMedia
                                                 component="img"
-                                                src={axiosAPI + `${n.image}`}
+                                                src={`${axiosAPI.defaults.baseURL}${n.image}`}
                                                 title={n.title}
                                                 sx={{
                                                     borderRadius: "8px",
@@ -65,7 +68,7 @@ const NewsList = () => {
                                             <strong style={{ color: "red" }}>Title: </strong> {n.title}
                                         </Typography>
                                         <Typography sx={{ fontSize: 18 }}>
-                                            <strong style={{ color: "blue" }}>Date publication:</strong> "{n.imageDate}"
+                                            <strong style={{ color: "blue" }}>Date publication:</strong> "{dayjs(n.imageDate).format('dddd, MMMM D, YYYY')}"
                                         </Typography>
                                     </Grid>
 
